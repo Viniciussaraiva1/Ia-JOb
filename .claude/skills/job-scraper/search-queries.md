@@ -1,90 +1,108 @@
 # Search Queries for Job Scraper
 
-<!-- SETUP: Customize these queries based on your skills, target roles, and location -->
+Profile focus: **remote / freelance CAD and civil-engineering design projects** (civil engineer, Brazil). Not a traditional full-time job search.
 
 ## Installed portal CLIs (primary for `/scrape`)
 
-`/scrape` discovers every portal skill under `.agents/skills/*/SKILL.md` and runs its CLI first. Shipped country-agnostic CLIs include `linkedin-search` and `freehire-search`; Danish demos and any skill you add with `/add-portal` are included the same way. You do **not** need a matching `site:` line below for those CLIs to run.
+`/scrape` discovers every portal skill under `.agents/skills/*/SKILL.md` and runs its CLI first (`linkedin-search`, `freehire-search`). The Danish portals ship disabled and stay disabled (Brazil market).
 
-The `site:` query templates in this file are the **WebSearch fallback** — for portals without a CLI, company career pages, or when a CLI fails.
+The `site:` queries below are the **WebSearch fallback** and the main route for freelance platforms, which have no CLI skill yet.
 
-**Language scope:** write every query category in every language listed in your CLAUDE.md Languages table (typically 1-2, sometimes more). A posting requiring a language you have *not* declared, as a job condition, is excluded before scoring; a posting requiring a *higher level* than you declared in a language you *do* work in is flagged for your own judgment, not excluded — see `04-job-evaluation.md`'s Language Gate, the single source of truth for this rule. Translate each category's keywords rather than machine-translating word-for-word (e.g. "Frontend Developer" -> "Desarrollador Frontend", not a literal word-for-word translation) if you work in more than one language.
+**Language scope:** write queries in Portuguese and English. English opens the international remote market; Portuguese covers Brazilian platforms. (English proficiency level is not yet confirmed in CLAUDE.md; a posting that requires fluent English is flagged for the candidate's judgment, per `04-job-evaluation.md`.)
 
 ## Search Sites
 
-Primary (your market's job boards - scaffold one with `/add-portal`):
-- **[YOUR_JOB_BOARD]** - your market's largest general job board
-- **linkedin.com/jobs** - LinkedIn job listings (filter: [YOUR_COUNTRY] / [YOUR_CITY]); also covered by `linkedin-search` CLI
-- **[YOUR_INDUSTRY_JOB_BOARD]** - a niche/industry board for your field (optional)
-- **[YOUR_ADDITIONAL_JOB_BOARD]** - another major board for your market (optional)
+Freelance / project platforms (primary):
+- **workana.com** - Latin American freelance marketplace (Portuguese/Spanish)
+- **99freelas.com.br** - Brazilian freelance marketplace
+- **upwork.com** - international, remote, English
+- **freelancer.com** - international, remote, English
+- **fiverr.com** - gig marketplace (offers, not job posts; useful for pricing benchmarks)
 
-Secondary (company career pages via Google):
-- Direct Google searches with `site:` filters for known target companies
+Secondary:
+- **linkedin.com/jobs** - filter: contract / remote / Brazil or worldwide; also covered by `linkedin-search`
+- Direct Google searches for engineering/drafting firms that outsource CAD work
 
 ## Query Categories
 
-Queries are grouped by priority. Write **each category in every language from your Languages table** (see Language scope above). Combine each query with your location terms (e.g. your city, region, or metro area) where the site supports it.
+Organized by function, not exact title.
 
-**Organize by function, not job title.** The same underlying work carries different titles across companies and markets (a "Data Scientist" role at one employer may be posted as "Insights Analyst" or "Data Consultant" at another). Name each priority category after the function it covers, and list several plausible job titles as query variants within that category rather than betting an entire priority tier on one exact title string.
+### Priority 1: CAD drafting and design (AutoCAD)
 
-### Priority 1: [YOUR_PRIMARY_ROLE_TYPE]
-
-These match your strongest and most desired career direction.
+Strongest match: AutoCAD is the candidate's primary design tool.
 
 ```
-site:[YOUR_JOB_BOARD] "[YOUR_PRIMARY_JOB_TITLE_1]" [YOUR_CITY]
-site:[YOUR_JOB_BOARD] "[YOUR_PRIMARY_JOB_TITLE_2]" [YOUR_CITY]
-site:[YOUR_JOB_BOARD] "[YOUR_KEY_SKILL]" [YOUR_CITY]
-site:linkedin.com/jobs "[YOUR_PRIMARY_JOB_TITLE_1]" [YOUR_COUNTRY]
+site:workana.com AutoCAD projetista remoto
+site:workana.com desenho CAD projeto
+site:99freelas.com.br AutoCAD projetista
+site:99freelas.com.br desenhista CAD
+site:upwork.com "AutoCAD" drafting remote
+site:upwork.com "2D drafting" civil
+site:freelancer.com AutoCAD drawing civil
+site:linkedin.com/jobs "AutoCAD" freelance remote
 ```
 
-### Priority 2: [YOUR_DOMAIN_EXPERTISE]
+### Priority 2: Roads, geometric design, signage, urban mobility
 
-These match your domain expertise.
-
-```
-site:[YOUR_JOB_BOARD] [YOUR_DOMAIN_KEYWORD_1] [YOUR_CITY] OR [YOUR_REGION]
-site:[YOUR_JOB_BOARD] [YOUR_DOMAIN_KEYWORD_2] [YOUR_COUNTRY]
-site:linkedin.com/jobs [YOUR_DOMAIN_KEYWORD_1] [YOUR_CITY] [YOUR_COUNTRY]
-```
-
-### Priority 3: [YOUR_ADJACENT_ROLE_TYPE]
-
-Adjacent roles you could pivot into.
+Matches documented experience: geometric road design, vertical/horizontal signage, public lighting, urban mobility studies.
 
 ```
-site:[YOUR_JOB_BOARD] "[YOUR_ADJACENT_TITLE_1]" [YOUR_KEY_SKILL] [YOUR_CITY]
-site:[YOUR_JOB_BOARD] "[YOUR_ADJACENT_TITLE_2]" [YOUR_KEY_SKILL] [YOUR_CITY]
+site:workana.com projeto geométrico rodoviário
+site:workana.com sinalização viária projeto
+site:99freelas.com.br projeto viário engenheiro civil
+site:upwork.com "road design" civil engineer remote
+site:upwork.com "geometric design" highway AutoCAD
+site:freelancer.com civil 3D road design
 ```
 
-### Priority 4: Broader Technical / Consulting
+### Priority 3: Structures, foundations, buildings
 
-Wider net for general technical roles.
+Matches: reinforced-concrete and steel structural calculation, shallow/deep foundations, renovations.
 
 ```
-site:[YOUR_JOB_BOARD] [YOUR_KEY_SKILL] developer [YOUR_CITY]
-site:linkedin.com/jobs "[YOUR_KEY_SKILL] developer" [YOUR_CITY]
-site:[YOUR_JOB_BOARD] "technical consultant" [YOUR_DOMAIN] [YOUR_CITY]
+site:workana.com projeto estrutural concreto armado
+site:workana.com projeto de fundação engenheiro civil
+site:99freelas.com.br projeto estrutural
+site:upwork.com "structural drafting" concrete steel remote
+site:freelancer.com structural engineering drawings AutoCAD
+```
+
+### Priority 4: Geotechnics, pavement, reports and permits
+
+Matches: geotechnical reports and studies, asphalt pavement specialization, ARTs.
+
+```
+site:workana.com laudo geotécnico engenheiro
+site:99freelas.com.br geotecnia pavimentação projeto
+site:upwork.com geotechnical engineer remote report
+site:upwork.com "pavement design" civil remote
+```
+
+### Priority 5: Planning and project management (secondary)
+
+Matches: project management, scheduling in MS Project, management reports.
+
+```
+site:workana.com planejamento de obras MS Project
+site:99freelas.com.br planejamento e controle de obras
+site:upwork.com "MS Project" construction planning remote
 ```
 
 ## Location Filter
 
-When evaluating results, verify the job location is within reasonable commute distance from your home. Define acceptable areas:
-- [YOUR_CITY] and surrounding areas
-- [ACCEPTABLE_AREA_1]
-- [ACCEPTABLE_AREA_2]
-- [BORDERLINE_AREA] (borderline - ~X min by transit)
-- [TOO_FAR_AREA] (too far)
+Remote work is required; physical location is not a constraint.
+- Accept: remote anywhere, remote Brazil, remote Latin America
+- Prefer: payment in a method the candidate can receive in Brazil (BRL, USD via platform)
+- Exclude: on-site only, or "must reside in <country>" requirements that exclude Brazil
 
 ## Language Filter
 
-Your working languages and levels are in CLAUDE.md's Languages table. When filtering scraped results, apply `04-job-evaluation.md`'s Language Gate: a posting requiring a language you haven't declared at all is excluded; a posting requiring a higher level than you declared in a language you do work in is not excluded, flag it clearly instead (see `job-scraper/SKILL.md`'s Step 3 "Quick Fit Assessment" for how the flag surfaces in `/scrape` output). Postings simply *written* in a language you don't work in, that don't require it on the job, are fine.
+Postings in Portuguese: fine. Postings in English: include, and flag if the project requires fluent client communication (English level not yet declared). Exclude postings requiring a language the candidate has not declared at all, per the Language Gate in `04-job-evaluation.md`.
 
-## Date Filter
+## Project Filter (replaces Date Filter for freelance)
 
-Only include jobs posted within the last 14 days, or with an application deadline that has not yet passed. If a posting date cannot be determined, include it but flag as "date unknown".
+Prefer postings that are recent (last 14 days; freelance postings go stale within days). For each result record: platform, scope, estimated budget or hourly rate, deadline, client history/rating when shown, and whether the brief includes drawings or only a verbal description. Flag postings with no budget, clearly below-market prices, or requests to work for free ("test drawing") as low priority.
 
 ## Adapting Queries
 
-If the user specifies a focus area, select queries from the matching category and also generate 2-3 custom queries for that focus. For example:
-- "/scrape [focus_area]" -> relevant category queries + custom focus-specific queries
+If the user specifies a focus area (for example "/scrape structural" or "/scrape road"), select queries from the matching category and also generate 2-3 custom queries for that focus.
