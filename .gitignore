@@ -119,3 +119,6 @@ company_research/*.json
 
 # Brainstorm mockups (superpowers visual companion) - never ship
 .superpowers/
+
+# Agente Upwork: configuração pessoal (perfil, e-mail) fica só na máquina local
+.claude/skills/upwork-ciclo/config.local.md
