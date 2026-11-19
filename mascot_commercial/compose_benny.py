@@ -60,7 +60,7 @@ def endcard_frames(folder, icon):
 
 def logo_icon(s3_path):
     """Circular mascot-head icon cropped from the end-card image."""
-    src = Image.open(s3_path).convert("RGB").crop((96, 30, 466, 400)).resize((300, 300))
+    src = Image.open(s3_path).convert("RGB").crop((90, 50, 480, 440)).resize((300, 300))
     mask = Image.new("L", (300, 300), 0)
     ImageDraw.Draw(mask).ellipse([0, 0, 299, 299], fill=255)
     icon = Image.new("RGBA", (300, 300), (0, 0, 0, 0))
